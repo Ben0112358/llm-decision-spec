@@ -1,1 +1,1 @@
-# llm-reasoning-spec
+# llm-decision-spec
