@@ -14,11 +14,9 @@ class And(Operator):
         for r in results:
             evidence.extend(r.evidence)
 
-        return EvaluationResult(
-            value=value,
-            evidence=evidence
-        )
-    
+        return EvaluationResult(value=value, evidence=evidence)
+
+
 class Or(Operator):
     def __init__(self, *children: Operator):
         self.children = children
@@ -32,19 +30,16 @@ class Or(Operator):
         for r in results:
             evidence.extend(r.evidence)
 
-        return EvaluationResult(
-            value=value,
-            evidence=evidence
-        )
-    
+        return EvaluationResult(value=value, evidence=evidence)
+
 
 class Not(Operator):
     def __init__(self, child: Operator):
         self.child = child
+
     def evaluate(self, context) -> EvaluationResult:
         results = self.child.evaluate(context)
 
         return EvaluationResult(
-            value=not results.value,
-            evidence=results.evidence
+            value=not results.value, evidence=results.evidence
         )

@@ -13,7 +13,7 @@ class EvaluationResult:
 
 
 class Operator(ABC):
-    
+
     @abstractmethod
     def evaluate(self, context) -> EvaluationResult:
         raise NotImplementedError
@@ -23,12 +23,15 @@ class Operator(ABC):
 
     def __add__(self, other: "Operator") -> "Operator":
         from .logical import Or
+
         return Or(self, other)
 
     def __mul__(self, other: "Operator") -> "Operator":
         from .logical import And
+
         return And(self, other)
 
     def __sub__(self, other: "Operator") -> "Operator":
         from .logical import And, Not
+
         return And(self, Not(other))
