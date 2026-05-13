@@ -34,7 +34,9 @@ class Or(Operator):
         if not results:
             return EvaluationResult(data=[])
 
-        or_ids = set().union(*(set(context.key(tx) for tx in r) for r in results))
+        or_ids = set().union(
+            *(set(context.key(tx) for tx in r) for r in results)
+        )
 
         index = {}
         for r in results:
@@ -72,9 +74,6 @@ class Difference(Operator):
 
         right_ids = {context.key(tx) for tx in right_result}
 
-        data = [
-            tx for tx in left_result
-            if context.key(tx) not in right_ids
-        ]
+        data = [tx for tx in left_result if context.key(tx) not in right_ids]
 
         return EvaluationResult(data=data)

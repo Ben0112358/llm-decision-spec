@@ -11,4 +11,3 @@ class DummyOperator(Operator):
             data=self._data,
             metadata=self._metadata,
         )
-
