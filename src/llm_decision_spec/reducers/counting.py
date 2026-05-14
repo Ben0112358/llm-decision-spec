@@ -1,5 +1,6 @@
 from llm_decision_spec.reducers.base import Reducer
 
+
 class Count(Reducer):
     def __init__(self, field=None):
         self.field = field
@@ -12,6 +13,7 @@ class Count(Reducer):
 
         return sum(1 for tx in result if tx.get(self.field) is not None)
 
+
 class CountDistinct(Reducer):
     def __init__(self, field=None):
         self.field = field
@@ -23,9 +25,7 @@ class CountDistinct(Reducer):
             return len({context.key(tx) for tx in result})
 
         values = {
-            tx[self.field]
-            for tx in result
-            if tx.get(self.field) is not None
+            tx[self.field] for tx in result if tx.get(self.field) is not None
         }
 
         return len(values)

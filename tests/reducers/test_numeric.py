@@ -1,5 +1,11 @@
 import pytest
-from llm_decision_spec.reducers.numeric import Sum, Average, Min, Max, Percentile
+from llm_decision_spec.reducers.numeric import (
+    Sum,
+    Average,
+    Min,
+    Max,
+    Percentile,
+)
 from llm_decision_spec.operators.logical import And
 from tests.utils.operators import DummyOperator
 
@@ -32,7 +38,6 @@ def test_sum_empty(ctx):
     assert result is None
 
 
-
 def test_avg_basic(ctx):
     op = make(ctx, [1, 2, 3])
 
@@ -55,7 +60,6 @@ def test_avg_empty(ctx):
     result = Average("amount").evaluate(op, ctx)
 
     assert result is None
-
 
 
 def test_min_basic(ctx):
@@ -82,7 +86,6 @@ def test_min_empty(ctx):
     assert result is None
 
 
-
 def test_max_basic(ctx):
     op = make(ctx, [1, 2, 3])
 
@@ -105,7 +108,6 @@ def test_max_empty(ctx):
     result = Max("amount").evaluate(op, ctx)
 
     assert result is None
-
 
 
 def test_percentile_0(ctx):

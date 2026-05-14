@@ -1,13 +1,10 @@
-import pytest
 from llm_decision_spec.reducers.counting import Count, CountDistinct
 from llm_decision_spec.operators.logical import And
 from tests.utils.operators import DummyOperator
 
 
-
 def make(ctx, ids):
     return DummyOperator([tx for tx in ctx.transactions if tx["id"] in ids])
-
 
 
 def test_count_all_rows(ctx):
@@ -77,12 +74,11 @@ def test_count_distinct_empty(ctx):
     assert result == 0
 
 
-
 def test_count_distinct_field(ctx):
     op = make(ctx, [1, 2, 3])
 
     result = CountDistinct("merchant").evaluate(op, ctx)
-    
+
     assert result == 2
 
 
