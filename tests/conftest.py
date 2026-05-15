@@ -12,5 +12,5 @@ def universe():
 
 
 @pytest.fixture
-def ctx(universe):
-    return Context(transactions=universe, key_fn=lambda tx: tx["id"])
+def context(universe):
+    return Context(events=universe, key_fn=lambda event: event["id"])

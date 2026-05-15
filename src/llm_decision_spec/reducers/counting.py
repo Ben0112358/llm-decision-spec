@@ -11,7 +11,7 @@ class Count(Reducer):
         if self.field is None:
             return len(result)
 
-        return sum(1 for tx in result if tx.get(self.field) is not None)
+        return sum(1 for event in result if event.get(self.field) is not None)
 
 
 class CountDistinct(Reducer):
@@ -22,10 +22,10 @@ class CountDistinct(Reducer):
         result = operator.evaluate(context).data
 
         if self.field is None:
-            return len({context.key(tx) for tx in result})
+            return len({context.key(event) for event in result})
 
         values = {
-            tx[self.field] for tx in result if tx.get(self.field) is not None
+            event[self.field] for event in result if event.get(self.field) is not None
         }
 
         return len(values)
