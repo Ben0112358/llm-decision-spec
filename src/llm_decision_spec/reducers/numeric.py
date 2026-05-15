@@ -9,9 +9,9 @@ class Sum(Reducer):
         result = operator.evaluate(context).data
 
         values = [
-            tx.get(self.field)
-            for tx in result
-            if tx.get(self.field) is not None
+            event.get(self.field)
+            for event in result
+            if event.get(self.field) is not None
         ]
 
         if not values:
@@ -31,9 +31,9 @@ class Average(Reducer):
         result = operator.evaluate(context).data
 
         values = [
-            tx.get(self.field)
-            for tx in result
-            if tx.get(self.field) is not None
+            event.get(self.field)
+            for event in result
+            if event.get(self.field) is not None
         ]
 
         if not values:
@@ -57,9 +57,9 @@ class Percentile(Reducer):
         result = operator.evaluate(context).data
 
         values = [
-            tx.get(self.field)
-            for tx in result
-            if tx.get(self.field) is not None
+            event.get(self.field)
+            for event in result
+            if event.get(self.field) is not None
         ]
 
         if not values:
@@ -82,9 +82,9 @@ class Max(Reducer):
         result = operator.evaluate(context).data
 
         values = [
-            tx.get(self.field)
-            for tx in result
-            if tx.get(self.field) is not None
+            event.get(self.field)
+            for event in result
+            if event.get(self.field) is not None
         ]
 
         if not values:
@@ -104,9 +104,9 @@ class Min(Reducer):
         result = operator.evaluate(context).data
 
         values = [
-            tx.get(self.field)
-            for tx in result
-            if tx.get(self.field) is not None
+            event.get(self.field)
+            for event in result
+            if event.get(self.field) is not None
         ]
 
         if not values:

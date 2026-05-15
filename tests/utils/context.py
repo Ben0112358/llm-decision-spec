@@ -1,5 +1,5 @@
 from llm_decision_spec.execution.context import Context
 
 
-def make_context(transactions):
-    return Context(transactions=transactions, key_fn=lambda tx: tx["id"])
+def make_context(events):
+    return Context(events=events, key_fn=lambda event: event["id"])

@@ -11,15 +11,15 @@ class And(Operator):
         if not results:
             return EvaluationResult(data=[])
 
-        id_sets = [set(context.key(tx) for tx in r) for r in results]
+        id_sets = [set(context.key(event) for event in r) for r in results]
         and_ids = set.intersection(*id_sets)
 
         index = {}
         for r in results:
-            for tx in r:
-                index[context.key(tx)] = tx
+            for event in r:
+                index[context.key(event)] = event
 
-        data = [index[tx_id] for tx_id in and_ids]
+        data = [index[event_id] for event_id in and_ids]
 
         return EvaluationResult(data=data)
 
@@ -35,15 +35,15 @@ class Or(Operator):
             return EvaluationResult(data=[])
 
         or_ids = set().union(
-            *(set(context.key(tx) for tx in r) for r in results)
+            *(set(context.key(event) for event in r) for r in results)
         )
 
         index = {}
         for r in results:
-            for tx in r:
-                index[context.key(tx)] = tx
+            for event in r:
+                index[context.key(event)] = event
 
-        data = [index[tx_id] for tx_id in or_ids]
+        data = [index[event_id] for event_id in or_ids]
 
         return EvaluationResult(data=data)
 
@@ -55,10 +55,12 @@ class Not(Operator):
     def evaluate(self, context):
         child_data = self.child.evaluate(context).data
 
-        child_ids = {context.key(tx) for tx in child_data}
-        universe = context.transactions
+        child_ids = {context.key(event) for event in child_data}
+        universe = context.events
 
-        data = [tx for tx in universe if context.key(tx) not in child_ids]
+        data = [
+            event for event in universe if context.key(event) not in child_ids
+        ]
 
         return EvaluationResult(data=data)
 
@@ -72,8 +74,12 @@ class Difference(Operator):
         left_result = self.left.evaluate(context).data
         right_result = self.right.evaluate(context).data
 
-        right_ids = {context.key(tx) for tx in right_result}
+        right_ids = {context.key(event) for event in right_result}
 
-        data = [tx for tx in left_result if context.key(tx) not in right_ids]
+        data = [
+            event
+            for event in left_result
+            if context.key(event) not in right_ids
+        ]
 
         return EvaluationResult(data=data)

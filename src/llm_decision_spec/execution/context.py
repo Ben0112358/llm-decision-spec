@@ -4,18 +4,18 @@ from collections.abc import Callable
 
 @dataclass
 class Context:
-    transactions: list[dict]
+    events: list[dict]
     key_fn: Callable[[dict], object]
 
-    def key(self, tx: dict) -> object:
-        return self.key_fn(tx)
+    def key(self, event: dict) -> object:
+        return self.key_fn(event)
 
     def keys(self, rows: list[dict]) -> set:
-        return {self.key(tx) for tx in rows}
+        return {self.key(event) for event in rows}
 
     def index(self, rows: list[list[dict]]) -> dict:
         out = {}
         for group in rows:
-            for tx in group:
-                out[self.key(tx)] = tx
+            for event in group:
+                out[self.key(event)] = event
         return out

@@ -1,2 +1,2 @@
-def assert_tx_ids(result, expected, ctx):
-    assert {ctx.key(tx) for tx in result.data} == set(expected)
+def assert_event_ids(result, expected, context):
+    assert {context.key(event) for event in result.data} == set(expected)
