@@ -25,7 +25,9 @@ class CountDistinct(Reducer):
             return len({context.key(event) for event in result})
 
         values = {
-            event[self.field] for event in result if event.get(self.field) is not None
+            event[self.field]
+            for event in result
+            if event.get(self.field) is not None
         }
 
         return len(values)

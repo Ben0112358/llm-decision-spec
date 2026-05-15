@@ -11,7 +11,9 @@ from tests.utils.operators import DummyOperator
 
 
 def make(context, ids):
-    return DummyOperator([event for event in context.events if event["id"] in ids])
+    return DummyOperator(
+        [event for event in context.events if event["id"] in ids]
+    )
 
 
 def test_sum_basic(context):

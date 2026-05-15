@@ -58,7 +58,9 @@ class Not(Operator):
         child_ids = {context.key(event) for event in child_data}
         universe = context.events
 
-        data = [event for event in universe if context.key(event) not in child_ids]
+        data = [
+            event for event in universe if context.key(event) not in child_ids
+        ]
 
         return EvaluationResult(data=data)
 
@@ -74,6 +76,10 @@ class Difference(Operator):
 
         right_ids = {context.key(event) for event in right_result}
 
-        data = [event for event in left_result if context.key(event) not in right_ids]
+        data = [
+            event
+            for event in left_result
+            if context.key(event) not in right_ids
+        ]
 
         return EvaluationResult(data=data)

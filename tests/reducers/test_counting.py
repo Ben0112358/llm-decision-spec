@@ -4,7 +4,9 @@ from tests.utils.operators import DummyOperator
 
 
 def make(context, ids):
-    return DummyOperator([event for event in context.events if event["id"] in ids])
+    return DummyOperator(
+        [event for event in context.events if event["id"] in ids]
+    )
 
 
 def test_count_all_rows(context):

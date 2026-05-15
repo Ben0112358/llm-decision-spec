@@ -20,8 +20,12 @@ def test_exists_false_when_empty(context):
 
 
 def test_exists_with_and(context):
-    a = DummyOperator([event for event in context.events if event["id"] in [1, 2]])
-    b = DummyOperator([event for event in context.events if event["id"] in [2, 3]])
+    a = DummyOperator(
+        [event for event in context.events if event["id"] in [1, 2]]
+    )
+    b = DummyOperator(
+        [event for event in context.events if event["id"] in [2, 3]]
+    )
 
     expr = And(a, b)
 
