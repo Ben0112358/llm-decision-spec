@@ -1,5 +1,3 @@
-import pytest
-
 from llm_decision_spec.filters.strings import Contains, Regex
 from llm_decision_spec.operators.logical import And
 from llm_decision_spec.filters.comparison import Gt
@@ -41,7 +39,6 @@ def test_contains_non_string_excluded(context):
     assert ids(result) == []
 
 
-
 def test_regex_matches_pattern(context):
     op = Regex("currency", r"S.K")
 
@@ -72,7 +69,6 @@ def test_regex_non_string_excluded(context):
     result = op.evaluate(context)
 
     assert ids(result) == []
-
 
 
 def test_contains_with_and(context):

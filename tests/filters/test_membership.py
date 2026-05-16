@@ -1,11 +1,8 @@
-import pytest
 from llm_decision_spec.filters.membership import In, NotIn
-
 
 
 def ids(result):
     return sorted(e["id"] for e in result.data)
-
 
 
 def test_in_matches_values(context):
@@ -38,7 +35,6 @@ def test_in_missing_field_excluded(context):
     result = op.evaluate(context)
 
     assert ids(result) == []
-
 
 
 def test_not_in_filters_out_values(context):

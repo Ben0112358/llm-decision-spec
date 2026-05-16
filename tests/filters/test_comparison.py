@@ -1,10 +1,8 @@
-import pytest
 from llm_decision_spec.filters.comparison import Eq, Ne, Gt, Gte, Lt, Lte
 
 
 def ids(result):
     return sorted(e["id"] for e in result.data)
-
 
 
 def test_eq_matches_exact(context):
@@ -47,7 +45,6 @@ def test_ne_missing_field_excluded(context):
     assert ids(result) == []
 
 
-
 def test_gt_amount(context):
     op = Gt("amount", 100)
 
@@ -78,8 +75,6 @@ def test_lte_amount(context):
     result = op.evaluate(context)
 
     assert ids(result) == [2, 3]
-
-
 
 
 def test_comparisons_ignore_missing_fields(context):

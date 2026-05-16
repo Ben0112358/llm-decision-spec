@@ -1,9 +1,6 @@
 from llm_decision_spec.operators.base import Operator, EvaluationResult
 
 
-
-
-
 class Eq(Operator):
     def __init__(self, field, value):
         self.field = field
@@ -19,7 +16,8 @@ class Eq(Operator):
                 data.append(e)
 
         return EvaluationResult(data=data)
-    
+
+
 class Ne(Operator):
     def __init__(self, field, value):
         self.field = field
@@ -36,6 +34,7 @@ class Ne(Operator):
 
         return EvaluationResult(data=data)
 
+
 class Gte(Operator):
     def __init__(self, field, value):
         self.field = field
@@ -51,7 +50,8 @@ class Gte(Operator):
                 data.append(e)
 
         return EvaluationResult(data=data)
-    
+
+
 class Lte(Operator):
     def __init__(self, field, value):
         self.field = field
@@ -67,7 +67,8 @@ class Lte(Operator):
                 data.append(e)
 
         return EvaluationResult(data=data)
-    
+
+
 class Gt(Operator):
     def __init__(self, field, value):
         self.field = field
@@ -83,8 +84,8 @@ class Gt(Operator):
                 data.append(e)
 
         return EvaluationResult(data=data)
-    
-    
+
+
 class Lt(Operator):
     def __init__(self, field, value):
         self.field = field
@@ -100,4 +101,3 @@ class Lt(Operator):
                 data.append(e)
 
         return EvaluationResult(data=data)
-    

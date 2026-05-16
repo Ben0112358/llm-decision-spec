@@ -12,7 +12,7 @@ class Has(Operator):
                 data.append(e)
 
         return EvaluationResult(data=data)
-    
+
 
 class Missing(Operator):
     def __init__(self, field):
@@ -24,4 +24,4 @@ class Missing(Operator):
             if self.field not in e:
                 data.append(e)
 
-        return EvaluationResult(data=data)    
+        return EvaluationResult(data=data)

@@ -18,6 +18,7 @@ class Contains(Operator):
 
         return EvaluationResult(data=data)
 
+
 class StartsWith(Operator):
     def __init__(self, field, substring):
         self.field = field
@@ -34,6 +35,7 @@ class StartsWith(Operator):
 
         return EvaluationResult(data=data)
 
+
 class EndsWith(Operator):
     def __init__(self, field, substring):
         self.field = field
@@ -49,6 +51,7 @@ class EndsWith(Operator):
                 data.append(e)
 
         return EvaluationResult(data=data)
+
 
 class Regex(Operator):
     def __init__(self, field, pattern):

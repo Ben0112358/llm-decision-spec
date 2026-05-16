@@ -1,7 +1,6 @@
 from llm_decision_spec.operators.base import Operator, EvaluationResult
 
 
-
 class In(Operator):
     def __init__(self, field, values):
         self.field = field
@@ -17,7 +16,7 @@ class In(Operator):
                 data.append(e)
 
         return EvaluationResult(data=data)
-    
+
 
 class NotIn(Operator):
     def __init__(self, field, values):
