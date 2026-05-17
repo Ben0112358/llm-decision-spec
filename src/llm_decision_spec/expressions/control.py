@@ -22,4 +22,4 @@ class FillNA(Coalesce):
 
 
 class NullIf(Expr):
-    raise NotImplementedError("NullIf not implemented")
+    pass
