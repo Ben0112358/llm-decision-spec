@@ -1,4 +1,6 @@
 from .base import Expr, _require_expr
+from .base import Const
+from typing import Any
 
 class Coalesce(Expr):
     def __init__(self, *exprs: Expr):
@@ -13,3 +15,8 @@ class Coalesce(Expr):
             if v is not None:
                 return v
         return None
+
+
+class FillNA(Coalesce):
+    def __init__(self, expr: Expr, fill_expr: Expr):
+        super().__init__(expr, fill_expr)
