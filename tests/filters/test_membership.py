@@ -1,4 +1,7 @@
+from llm_decision_spec.expressions import Const, Field
+from llm_decision_spec.filters.comparison import Gt
 from llm_decision_spec.filters.membership import In, NotIn
+from llm_decision_spec.operators.logical import And
 
 
 def ids(result):
@@ -6,7 +9,7 @@ def ids(result):
 
 
 def test_in_matches_values(context):
-    op = In("currency", ["SEK"])
+    op = In(Field("currency"), Const(frozenset({"SEK"})))
 
     result = op.evaluate(context)
 
@@ -14,7 +17,7 @@ def test_in_matches_values(context):
 
 
 def test_in_multiple_values(context):
-    op = In("currency", ["SEK", "USD"])
+    op = In(Field("currency"), Const(frozenset({"SEK", "USD"})))
 
     result = op.evaluate(context)
 
@@ -22,7 +25,7 @@ def test_in_multiple_values(context):
 
 
 def test_in_no_matches(context):
-    op = In("currency", ["EUR"])
+    op = In(Field("currency"), Const(frozenset({"EUR"})))
 
     result = op.evaluate(context)
 
@@ -30,7 +33,7 @@ def test_in_no_matches(context):
 
 
 def test_in_missing_field_excluded(context):
-    op = In("nonexistent", ["X"])
+    op = In(Field("nonexistent"), Const(frozenset({"X"})))
 
     result = op.evaluate(context)
 
@@ -38,7 +41,7 @@ def test_in_missing_field_excluded(context):
 
 
 def test_not_in_filters_out_values(context):
-    op = NotIn("currency", ["SEK"])
+    op = NotIn(Field("currency"), Const(frozenset({"SEK"})))
 
     result = op.evaluate(context)
 
@@ -46,7 +49,7 @@ def test_not_in_filters_out_values(context):
 
 
 def test_not_in_multiple_values(context):
-    op = NotIn("currency", ["SEK", "USD"])
+    op = NotIn(Field("currency"), Const(frozenset({"SEK", "USD"})))
 
     result = op.evaluate(context)
 
@@ -54,7 +57,7 @@ def test_not_in_multiple_values(context):
 
 
 def test_not_in_missing_field_excluded(context):
-    op = NotIn("nonexistent", ["X"])
+    op = NotIn(Field("nonexistent"), Const(frozenset({"X"})))
 
     result = op.evaluate(context)
 
@@ -62,12 +65,9 @@ def test_not_in_missing_field_excluded(context):
 
 
 def test_membership_with_and(context):
-    from llm_decision_spec.filters.comparison import Gt
-    from llm_decision_spec.operators.logical import And
-
     op = And(
-        In("currency", ["SEK", "USD"]),
-        Gt("amount", 100),
+        In(Field("currency"), Const(frozenset({"SEK", "USD"}))),
+        Gt(Field("amount"), Const(100)),
     )
 
     result = op.evaluate(context)

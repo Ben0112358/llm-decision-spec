@@ -1,9 +1,13 @@
-from llm_decision_spec.operators.base import Operator, EvaluationResult
+from llm_decision_spec.operators._validate import (
+    _require_operator,
+    _require_operators,
+)
+from llm_decision_spec.operators.base import EvaluationResult, Operator
 
 
 class And(Operator):
     def __init__(self, *children: Operator):
-        self.children = children
+        self.children = _require_operators(children, "And")
 
     def evaluate(self, context) -> EvaluationResult:
         results = [child.evaluate(context).data for child in self.children]
@@ -26,7 +30,7 @@ class And(Operator):
 
 class Or(Operator):
     def __init__(self, *children: Operator):
-        self.children = children
+        self.children = _require_operators(children, "Or")
 
     def evaluate(self, context) -> EvaluationResult:
         results = [child.evaluate(context).data for child in self.children]
@@ -50,7 +54,7 @@ class Or(Operator):
 
 class Not(Operator):
     def __init__(self, child: Operator):
-        self.child = child
+        self.child = _require_operator(child, "Not child")
 
     def evaluate(self, context):
         child_data = self.child.evaluate(context).data
@@ -67,8 +71,8 @@ class Not(Operator):
 
 class Difference(Operator):
     def __init__(self, left: Operator, right: Operator):
-        self.left = left
-        self.right = right
+        self.left = _require_operator(left, "Difference left")
+        self.right = _require_operator(right, "Difference right")
 
     def evaluate(self, context) -> EvaluationResult:
         left_result = self.left.evaluate(context).data

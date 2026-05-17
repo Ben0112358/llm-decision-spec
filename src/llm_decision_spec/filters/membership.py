@@ -1,35 +1,39 @@
-from llm_decision_spec.operators.base import Operator, EvaluationResult
+from llm_decision_spec.expressions.base import Const, Expr
+from llm_decision_spec.operators.base import Operator
+from llm_decision_spec.operators.predicate import filter_events_by_predicate
 
 
 class In(Operator):
-    def __init__(self, field, values):
-        self.field = field
-        self.values = set(values)
+    def __init__(self, left: Expr, right: Const):
+        if not isinstance(right, Const):
+            raise TypeError("In RHS must be Const(static collection)")
+        values = right.value
+        if not isinstance(values, (set, frozenset)):
+            raise TypeError("In RHS Const must wrap set or frozenset")
+        self.left = left
+        self._values = frozenset(values)
 
     def evaluate(self, context):
-        data = []
-        for e in context.events:
-            v = e.get(self.field)
-            if v is None:
-                continue
-            if v in self.values:
-                data.append(e)
-
-        return EvaluationResult(data=data)
+        return filter_events_by_predicate(
+            context,
+            left=self.left,
+            match_left=lambda v: v in self._values,
+        )
 
 
 class NotIn(Operator):
-    def __init__(self, field, values):
-        self.field = field
-        self.values = set(values)
+    def __init__(self, left: Expr, right: Const):
+        if not isinstance(right, Const):
+            raise TypeError("NotIn RHS must be Const(static collection)")
+        values = right.value
+        if not isinstance(values, (set, frozenset)):
+            raise TypeError("NotIn RHS Const must wrap set or frozenset")
+        self.left = left
+        self._values = frozenset(values)
 
     def evaluate(self, context):
-        data = []
-        for e in context.events:
-            v = e.get(self.field)
-            if v is None:
-                continue
-            if v not in self.values:
-                data.append(e)
-
-        return EvaluationResult(data=data)
+        return filter_events_by_predicate(
+            context,
+            left=self.left,
+            match_left=lambda v: v not in self._values,
+        )
