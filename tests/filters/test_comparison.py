@@ -1,3 +1,4 @@
+from llm_decision_spec.expressions import Const, Field
 from llm_decision_spec.filters.comparison import Eq, Ne, Gt, Gte, Lt, Lte
 
 
@@ -6,7 +7,7 @@ def ids(result):
 
 
 def test_eq_matches_exact(context):
-    op = Eq("currency", "SEK")
+    op = Eq(Field("currency"), Const("SEK"))
 
     result = op.evaluate(context)
 
@@ -14,7 +15,7 @@ def test_eq_matches_exact(context):
 
 
 def test_eq_no_matches(context):
-    op = Eq("currency", "EUR")
+    op = Eq(Field("currency"), Const("EUR"))
 
     result = op.evaluate(context)
 
@@ -22,7 +23,7 @@ def test_eq_no_matches(context):
 
 
 def test_eq_missing_field(context):
-    op = Eq("nonexistent", "X")
+    op = Eq(Field("nonexistent"), Const("X"))
 
     result = op.evaluate(context)
 
@@ -30,7 +31,7 @@ def test_eq_missing_field(context):
 
 
 def test_ne_excludes_matches(context):
-    op = Ne("currency", "SEK")
+    op = Ne(Field("currency"), Const("SEK"))
 
     result = op.evaluate(context)
 
@@ -38,7 +39,7 @@ def test_ne_excludes_matches(context):
 
 
 def test_ne_missing_field_excluded(context):
-    op = Ne("nonexistent", "X")
+    op = Ne(Field("nonexistent"), Const("X"))
 
     result = op.evaluate(context)
 
@@ -46,7 +47,7 @@ def test_ne_missing_field_excluded(context):
 
 
 def test_gt_amount(context):
-    op = Gt("amount", 100)
+    op = Gt(Field("amount"), Const(100))
 
     result = op.evaluate(context)
 
@@ -54,7 +55,7 @@ def test_gt_amount(context):
 
 
 def test_gte_amount(context):
-    op = Gte("amount", 100)
+    op = Gte(Field("amount"), Const(100))
 
     result = op.evaluate(context)
 
@@ -62,7 +63,7 @@ def test_gte_amount(context):
 
 
 def test_lt_amount(context):
-    op = Lt("amount", 100)
+    op = Lt(Field("amount"), Const(100))
 
     result = op.evaluate(context)
 
@@ -70,7 +71,7 @@ def test_lt_amount(context):
 
 
 def test_lte_amount(context):
-    op = Lte("amount", 100)
+    op = Lte(Field("amount"), Const(100))
 
     result = op.evaluate(context)
 
@@ -78,7 +79,7 @@ def test_lte_amount(context):
 
 
 def test_comparisons_ignore_missing_fields(context):
-    op = Gt("does_not_exist", 10)
+    op = Gt(Field("does_not_exist"), Const(10))
 
     result = op.evaluate(context)
 

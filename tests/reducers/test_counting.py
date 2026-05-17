@@ -1,3 +1,4 @@
+from llm_decision_spec.expressions import Field
 from llm_decision_spec.reducers.counting import Count, CountDistinct
 from llm_decision_spec.operators.logical import And
 from tests.utils.operators import DummyOperator
@@ -36,7 +37,7 @@ def test_count_empty(context):
 def test_count_field_non_null(context):
     op = make(context, [1, 2, 3])
 
-    result = Count("amount").evaluate(op, context)
+    result = Count(Field("amount")).evaluate(op, context)
 
     assert result == 3
 
@@ -47,7 +48,7 @@ def test_count_field_mixed_nulls(context):
 
     op = DummyOperator(modified)
 
-    result = Count("amount").evaluate(op, context)
+    result = Count(Field("amount")).evaluate(op, context)
 
     assert result == 2
 
@@ -79,7 +80,7 @@ def test_count_distinct_empty(context):
 def test_count_distinct_field(context):
     op = make(context, [1, 2, 3])
 
-    result = CountDistinct("merchant").evaluate(op, context)
+    result = CountDistinct(Field("merchant")).evaluate(op, context)
 
     assert result == 2
 
@@ -87,7 +88,7 @@ def test_count_distinct_field(context):
 def test_count_distinct_field_empty(context):
     op = make(context, [])
 
-    result = CountDistinct("merchant").evaluate(op, context)
+    result = CountDistinct(Field("merchant")).evaluate(op, context)
 
     assert result == 0
 
