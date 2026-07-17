@@ -52,8 +52,6 @@ class EndsWith(Operator):
 
 class Regex(Operator):
     def __init__(self, left: Expr, pattern: Const):
-        if not isinstance(pattern, Const):
-            raise TypeError("Regex pattern must be Const")
         if not isinstance(pattern.value, str):
             raise TypeError("Regex pattern Const must wrap str")
         self.left = left

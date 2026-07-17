@@ -14,7 +14,7 @@ def test_filter_then_sum(context):
         In(Field("currency"), Const(frozenset({"SEK", "USD"}))),
     )
     result = Sum(Field("amount")).evaluate(op, context)
-    assert result == 300  # ids 1 and 2 (id 3 has amount 50)
+    assert result == 300
 
 
 def test_expr_in_comparison(context):
