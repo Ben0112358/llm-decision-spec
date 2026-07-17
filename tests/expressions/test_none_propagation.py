@@ -8,7 +8,11 @@ from llm_decision_spec.filters.strings import Contains, Regex
 
 
 def _ctx(events):
-    return Context(events=events, key_fn=lambda e: e["id"])
+    return Context(
+        events=events,
+        key_fn=lambda e: e["id"],
+        datetime_fn=lambda e: e["datetime"],
+    )
 
 
 def test_predicate_skip_on_none_never_raises():

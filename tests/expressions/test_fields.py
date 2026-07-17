@@ -22,6 +22,10 @@ def test_has_key_present_value_none():
     event = {"id": 1, "amount": None}
     from llm_decision_spec.execution.context import Context
 
-    ctx = Context(events=[event], key_fn=lambda e: e["id"])
+    ctx = Context(
+        events=[event],
+        key_fn=lambda e: e["id"],
+        datetime_fn=lambda e: e["datetime"],
+    )
     result = Has(Field("amount")).evaluate(ctx)
     assert len(result.data) == 1
