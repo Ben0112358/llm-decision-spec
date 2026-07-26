@@ -6,14 +6,15 @@ from datetime import datetime
 @dataclass
 class Context:
     events: list[dict]
-    key_fn: Callable[[dict], object]
-    datetime_fn: Callable[[dict], datetime]
+    event_key_fn: Callable[[dict], object]
+    event_datetime_fn: Callable[[dict], datetime]
+    context_datetime: datetime
 
     def datetime(self, event: dict) -> datetime:
-        return self.datetime_fn(event)
+        return self.event_datetime_fn(event)
 
     def key(self, event: dict) -> object:
-        return self.key_fn(event)
+        return self.event_key_fn(event)
 
     def keys(self, rows: list[dict]) -> set:
         return {self.key(event) for event in rows}
