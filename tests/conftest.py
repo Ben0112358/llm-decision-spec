@@ -2,6 +2,8 @@ import pytest
 from llm_decision_spec.execution.context import Context
 from datetime import datetime
 
+PLACEHOLDER_CONTEXT_DATETIME = datetime(2099, 12, 31, 23, 59, 59)
+
 
 @pytest.fixture
 def universe():
@@ -34,6 +36,8 @@ def universe():
 def context(universe):
     return Context(
         events=universe,
-        key_fn=lambda event: event["id"],
-        datetime_fn=lambda event: event["datetime"],
+        event_key_fn=lambda event: event["id"],
+        event_datetime_fn=lambda event: event["datetime"],
+        context_datetime=datetime(2026, 1, 4, 12, 0, 0),
     )
+
