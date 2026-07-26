@@ -64,15 +64,14 @@ def filter_events_by_str_binary(
 
 
 def filter_events_by_context_datetime(
-    context,
-    *,
-    match: Callable[[dict, Context], bool]
+    context, *, match: Callable[[dict, Context], bool]
 ) -> EvaluationResult:
     data = []
     for e in context.events:
         if match(e, context):
             data.append(e)
     return EvaluationResult(data=data)
+
 
 def filter_events_by_event_datetime(
     context,

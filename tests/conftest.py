@@ -40,4 +40,3 @@ def context(universe):
         event_datetime_fn=lambda event: event["datetime"],
         context_datetime=datetime(2026, 1, 4, 12, 0, 0),
     )
-

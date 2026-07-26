@@ -1,5 +1,3 @@
-"""Temporal selection: half-infinite and finite intervals via unary ops + And."""
-
 from datetime import datetime
 
 from llm_decision_spec.expressions.base import Const
@@ -85,7 +83,7 @@ def test_closed_interval(context):
 
 
 def test_boundary_included_only_on_closed_side(context):
-    """At exactly a: included by Before/StrictlyAfter, excluded by After/StrictlyBefore."""
+    """At exactly a"""
     assert ids(Before(Const(T_MID)).evaluate(context)) == [1, 3]
     assert ids(StrictlyBefore(Const(T_MID)).evaluate(context)) == [3]
     assert ids(StrictlyAfter(Const(T_MID)).evaluate(context)) == [1, 2]

@@ -1,6 +1,5 @@
 from llm_decision_spec.expressions import Field
 from llm_decision_spec.filters.presence import Has
-from datetime import datetime
 
 
 def test_field_returns_value():

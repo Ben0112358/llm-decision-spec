@@ -1,7 +1,10 @@
 from llm_decision_spec.operators.base import EvaluationResult, Operator
 from llm_decision_spec.execution.context import Context
 from llm_decision_spec.expressions import Expr
-from llm_decision_spec.operators.predicate import filter_events_by_context_datetime, filter_events_by_event_datetime
+from llm_decision_spec.operators.predicate import (
+    filter_events_by_context_datetime,
+    filter_events_by_event_datetime,
+)
 from dateutil import relativedelta
 
 
