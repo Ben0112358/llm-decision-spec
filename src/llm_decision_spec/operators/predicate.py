@@ -12,7 +12,6 @@ from llm_decision_spec.expressions.evaluate import (
     predicate_values,
 )
 from llm_decision_spec.operators.base import EvaluationResult
-from llm_decision_spec.execution.context import Context
 from datetime import datetime
 
 
@@ -64,12 +63,12 @@ def filter_events_by_str_binary(
 
 
 def filter_events_by_context_datetime(
-    context, *, match: Callable[[dict, Context], bool]
+    context, *, match: Callable[[datetime], bool]
 ) -> EvaluationResult:
     data = []
-    for e in context.events:
-        if match(e, context):
-            data.append(e)
+    for event in context.events:
+        if match(context.datetime(event)):
+            data.append(event)
     return EvaluationResult(data=data)
 
 

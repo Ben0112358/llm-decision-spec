@@ -5,7 +5,6 @@ from llm_decision_spec.operators.predicate import (
     filter_events_by_context_datetime,
     filter_events_by_event_datetime,
 )
-from dateutil import relativedelta
 
 
 class Before(Operator):
@@ -56,53 +55,51 @@ class StrictlyAfter(Operator):
         )
 
 
-class EventWithinXMonths(Operator):
+class EventWithinXDays(Operator):
     def __init__(self, x: int):
         self.x = x
 
     def evaluate(self, context: Context) -> EvaluationResult:
-        cutoff = context.context_datetime - relativedelta(months=self.x)
 
         return filter_events_by_context_datetime(
             context,
-            match=lambda event_time, now: event_time >= cutoff,
+            match=lambda event_time: (
+                context.context_datetime - event_time
+            ).days
+            <= self.x,
         )
 
 
-class EventStrictlyWithinXMonths(Operator):
+class EventBeyondXDays(Operator):
     def __init__(self, x: int):
         self.x = x
 
     def evaluate(self, context: Context) -> EvaluationResult:
-        cutoff = context.context_datetime - relativedelta(months=self.x)
 
         return filter_events_by_context_datetime(
             context,
-            match=lambda event_time, now: event_time > cutoff,
+            match=lambda event_time: (
+                context.context_datetime - event_time
+            ).days
+            >= self.x,
         )
 
 
-class EventBeyondXMonths(Operator):
-    def __init__(self, x: int):
+class EventFromXDaysBackToYDaysBack(Operator):
+    def __init__(self, x: int, y: int):
         self.x = x
+        self.y = y
+
+        if self.x < self.y:
+            raise ValueError(f"x ({x}) is smaller than y ({y}).")
 
     def evaluate(self, context: Context) -> EvaluationResult:
-        cutoff = context.context_datetime - relativedelta(months=self.x)
 
         return filter_events_by_context_datetime(
             context,
-            match=lambda event_time, now: event_time <= cutoff,
-        )
-
-
-class EventStrictlyBeyondXMonths(Operator):
-    def __init__(self, x: int):
-        self.x = x
-
-    def evaluate(self, context: Context) -> EvaluationResult:
-        cutoff = context.context_datetime - relativedelta(months=self.x)
-
-        return filter_events_by_context_datetime(
-            context,
-            match=lambda event_time, now: event_time < cutoff,
+            match=lambda event_time: (
+                context.context_datetime - event_time
+            ).days
+            <= self.x
+            and (context.context_datetime - event_time).days >= self.y,
         )
