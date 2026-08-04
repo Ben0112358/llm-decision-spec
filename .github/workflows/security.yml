@@ -10,12 +10,13 @@ on:
 
 permissions:
   contents: read
-  security-events: write
 
 jobs:
   gitleaks:
     name: Gitleaks
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout
@@ -32,6 +33,9 @@ jobs:
   trivy:
     name: Trivy
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
 
     steps:
       - name: Checkout
@@ -55,6 +59,9 @@ jobs:
   codeql:
     name: CodeQL
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
 
     steps:
       - name: Checkout
@@ -76,21 +83,55 @@ jobs:
   opengrep:
     name: Opengrep
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
 
     steps:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Run Opengrep
+      - name: Install Opengrep
         run: |
-          docker run --rm \
-            -v "${{ github.workspace }}:/src" \
-            -w /src \
-            opengrep/opengrep \
-            scan --config auto --sarif --output opengrep.sarif .
+          curl -fsSL https://raw.githubusercontent.com/opengrep/opengrep/main/install.sh -o install-opengrep.sh
+          bash install-opengrep.sh -v v1.26.0
+          echo "$HOME/.opengrep/cli/latest" >> "$GITHUB_PATH"
+
+      - name: Run Opengrep
+        run: opengrep scan --config auto --sarif-output opengrep.sarif .
 
       - name: Upload Opengrep SARIF
         if: always() && hashFiles('opengrep.sarif') != ''
         uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: opengrep.sarif
+
+
+  dependency-audit:
+    name: pip-audit
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Install Poetry
+        run: pipx install poetry
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: poetry
+
+      - name: Install dependencies
+        run: |
+          poetry config virtualenvs.create false
+          poetry install --no-interaction --no-ansi --sync
+
+      - name: Audit dependencies
+        run: |
+          pip install pip-audit
+          pip-audit
