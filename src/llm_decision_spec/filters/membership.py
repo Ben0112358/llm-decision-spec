@@ -5,8 +5,6 @@ from llm_decision_spec.operators.predicate import filter_events_by_predicate
 
 class In(Operator):
     def __init__(self, left: Expr, right: Const):
-        if not isinstance(right, Const):
-            raise TypeError("In RHS must be Const(static collection)")
         values = right.value
         if not isinstance(values, (set, frozenset)):
             raise TypeError("In RHS Const must wrap set or frozenset")
@@ -23,8 +21,6 @@ class In(Operator):
 
 class NotIn(Operator):
     def __init__(self, left: Expr, right: Const):
-        if not isinstance(right, Const):
-            raise TypeError("NotIn RHS must be Const(static collection)")
         values = right.value
         if not isinstance(values, (set, frozenset)):
             raise TypeError("NotIn RHS Const must wrap set or frozenset")

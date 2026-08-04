@@ -12,6 +12,7 @@ from llm_decision_spec.expressions.evaluate import (
     predicate_values,
 )
 from llm_decision_spec.operators.base import EvaluationResult
+from datetime import datetime
 
 
 def filter_events_by_predicate(
@@ -58,4 +59,36 @@ def filter_events_by_str_binary(
             continue
         if match(lv, rv):
             data.append(e)
+    return EvaluationResult(data=data)
+
+
+def filter_events_by_context_datetime(
+    context, *, match: Callable[[datetime], bool]
+) -> EvaluationResult:
+    data = []
+    for event in context.events:
+        if match(context.datetime(event)):
+            data.append(event)
+    return EvaluationResult(data=data)
+
+
+def filter_events_by_event_datetime(
+    context,
+    *,
+    right: Expr,
+    match: Callable[[datetime, Any], bool],
+) -> EvaluationResult:
+    data = []
+
+    for event in context.events:
+        rv = eval_expr(right, event)
+
+        if is_missing(rv):
+            continue
+
+        event_time = context.datetime(event)
+
+        if match(event_time, rv):
+            data.append(event)
+
     return EvaluationResult(data=data)

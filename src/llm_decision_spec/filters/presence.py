@@ -4,8 +4,6 @@ from llm_decision_spec.operators.base import EvaluationResult, Operator
 
 class Has(Operator):
     def __init__(self, field: Field):
-        if not isinstance(field, Field):
-            raise TypeError("Has requires Field(...)")
         self.field = field
 
     def evaluate(self, context):
@@ -16,8 +14,6 @@ class Has(Operator):
 
 class Missing(Operator):
     def __init__(self, field: Field):
-        if not isinstance(field, Field):
-            raise TypeError("Missing requires Field(...)")
         self.field = field
 
     def evaluate(self, context):

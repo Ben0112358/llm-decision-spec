@@ -6,9 +6,16 @@ from llm_decision_spec.filters.comparison import Eq, Gt
 from llm_decision_spec.filters.membership import In
 from llm_decision_spec.filters.strings import Contains, Regex
 
+from tests.conftest import PLACEHOLDER_CONTEXT_DATETIME
 
-def _ctx(events):
-    return Context(events=events, key_fn=lambda e: e["id"])
+
+def _ctx(events: list[dict]) -> Context:
+    return Context(
+        events=events,
+        event_key_fn=lambda e: e["id"],
+        event_datetime_fn=lambda e: e["datetime"],
+        context_datetime=PLACEHOLDER_CONTEXT_DATETIME,
+    )
 
 
 def test_predicate_skip_on_none_never_raises():

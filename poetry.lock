@@ -251,6 +251,21 @@ pygments = ">=2.7.2"
 dev = ["argcomplete", "attrs (>=19.2)", "hypothesis (>=3.56)", "mock", "requests", "setuptools", "xmlschema"]
 
 [[package]]
+name = "python-dateutil"
+version = "2.9.0.post0"
+description = "Extensions to the standard Python datetime module"
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,>=2.7"
+groups = ["main"]
+files = [
+    {file = "python-dateutil-2.9.0.post0.tar.gz", hash = "sha256:37dd54208da7e1cd875388217d5e00ebd4179249f90fb72437e91a35459a0ad3"},
+    {file = "python_dateutil-2.9.0.post0-py2.py3-none-any.whl", hash = "sha256:a8b2bc7bffae282281c8140a97d3aa9c14da0b136dfe83f850eea9a5f7470427"},
+]
+
+[package.dependencies]
+six = ">=1.5"
+
+[[package]]
 name = "pytokens"
 version = "0.4.1"
 description = "A Fast, spec compliant Python 3.14+ tokenizer that runs on older Pythons."
@@ -305,7 +320,19 @@ files = [
 [package.extras]
 dev = ["black", "build", "mypy", "pytest", "pytest-cov", "setuptools", "tox", "twine", "wheel"]
 
+[[package]]
+name = "six"
+version = "1.17.0"
+description = "Python 2 and 3 compatibility utilities"
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,>=2.7"
+groups = ["main"]
+files = [
+    {file = "six-1.17.0-py2.py3-none-any.whl", hash = "sha256:4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274"},
+    {file = "six-1.17.0.tar.gz", hash = "sha256:ff70335d468e7eb6ec65b95b99d3a2836546063f63acc5171de367e834932a81"},
+]
+
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12,<4.0"
-content-hash = "e49c62b1ac5aeff37e2c2bf5cf9fc3abbfbb57120fa5389535698af2863af94c"
+content-hash = "fed78bedd3227579bc422e64f6446394e3017b86bda32a514a6dd5a32bbcfe47"
