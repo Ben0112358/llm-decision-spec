@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from typing import Any
 
 from llm_decision_spec.expressions.base import Expr

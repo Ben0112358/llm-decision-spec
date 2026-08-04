@@ -1,4 +1,5 @@
-from llm_decision_spec.operators.base import Operator, EvaluationResult
+from llm_decision_spec.core.result import EvaluationResult
+from llm_decision_spec.operators.base import Operator
 
 
 class DummyOperator(Operator):

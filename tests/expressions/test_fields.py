@@ -1,5 +1,5 @@
 from llm_decision_spec.expressions import Field
-from llm_decision_spec.filters.presence import Has
+from llm_decision_spec.operators.presence import Has
 
 
 def test_field_returns_value():
@@ -20,7 +20,7 @@ def test_field_key_present_value_none():
 
 def test_has_key_present_value_none():
     event = {"id": 1, "amount": None}
-    from llm_decision_spec.execution.context import Context
+    from llm_decision_spec.core.context import Context
     from tests.conftest import PLACEHOLDER_CONTEXT_DATETIME
 
     ctx = Context(

@@ -2,7 +2,7 @@ import pytest
 from datetime import datetime
 
 from llm_decision_spec.expressions.base import Const
-from llm_decision_spec.filters.temporal import (
+from llm_decision_spec.operators.temporal import (
     After,
     Before,
     StrictlyAfter,

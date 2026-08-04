@@ -1,8 +1,9 @@
-from llm_decision_spec.operators._validate import (
+from llm_decision_spec.core.result import EvaluationResult
+from llm_decision_spec.operators.base import Operator
+from llm_decision_spec.util.validate import (
     _require_operator,
     _require_operators,
 )
-from llm_decision_spec.operators.base import EvaluationResult, Operator
 
 
 class And(Operator):

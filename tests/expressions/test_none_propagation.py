@@ -1,10 +1,10 @@
 import pytest
 
-from llm_decision_spec.execution.context import Context
+from llm_decision_spec.core.context import Context
 from llm_decision_spec.expressions import Const, Field
-from llm_decision_spec.filters.comparison import Eq, Gt
-from llm_decision_spec.filters.membership import In
-from llm_decision_spec.filters.strings import Contains, Regex
+from llm_decision_spec.operators.comparison import Eq, Gt
+from llm_decision_spec.operators.membership import In
+from llm_decision_spec.operators.strings import Contains, Regex
 
 from tests.conftest import PLACEHOLDER_CONTEXT_DATETIME
 

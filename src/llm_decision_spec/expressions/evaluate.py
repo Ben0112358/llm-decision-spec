@@ -6,8 +6,6 @@ None means missing (evaluated absence). Propagation rules:
 - reducers: valid_value excludes None
 """
 
-from __future__ import annotations
-
 from typing import Any
 
 from llm_decision_spec.expressions.base import Expr
