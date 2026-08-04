@@ -1,18 +1,16 @@
 """Unified predicate evaluation skeleton for value-driven operators."""
 
-from __future__ import annotations
-
 from collections.abc import Callable
+from datetime import datetime
 from typing import Any
 
+from llm_decision_spec.core.result import EvaluationResult
 from llm_decision_spec.expressions.base import Expr
 from llm_decision_spec.expressions.evaluate import (
     eval_expr,
     is_missing,
     predicate_values,
 )
-from llm_decision_spec.operators.base import EvaluationResult
-from datetime import datetime
 
 
 def filter_events_by_predicate(

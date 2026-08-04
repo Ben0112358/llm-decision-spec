@@ -1,5 +1,5 @@
 from llm_decision_spec.expressions import Const, Field
-from llm_decision_spec.filters.comparison import Eq, Ne, Gt, Gte, Lt, Lte
+from llm_decision_spec.operators.comparison import Eq, Ne, Gt, Gte, Lt, Lte
 
 
 def ids(result):

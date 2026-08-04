@@ -1,7 +1,7 @@
 import pytest
 
 from llm_decision_spec.expressions import Const, Field
-from llm_decision_spec.filters.comparison import Gt
+from llm_decision_spec.operators.comparison import Gt
 from llm_decision_spec.expressions.arithmetic import Add
 from llm_decision_spec.operators.logical import And
 

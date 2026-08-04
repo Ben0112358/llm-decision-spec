@@ -1,5 +1,6 @@
+from llm_decision_spec.core.result import EvaluationResult
 from llm_decision_spec.expressions.fields import Field
-from llm_decision_spec.operators.base import EvaluationResult, Operator
+from llm_decision_spec.operators.base import Operator
 
 
 class Has(Operator):

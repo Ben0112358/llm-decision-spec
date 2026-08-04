@@ -1,5 +1,5 @@
 import pytest
-from llm_decision_spec.execution.context import Context
+from llm_decision_spec.core.context import Context
 from datetime import datetime
 
 PLACEHOLDER_CONTEXT_DATETIME = datetime(2099, 12, 31, 23, 59, 59)

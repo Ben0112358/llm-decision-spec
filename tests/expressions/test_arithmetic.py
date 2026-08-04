@@ -1,7 +1,7 @@
 import pytest
 
 from llm_decision_spec.expressions import Add, Const, Field, Mul, Neg, Pow, Sub
-from llm_decision_spec.filters.comparison import Gt
+from llm_decision_spec.operators.comparison import Gt
 
 
 def test_add():

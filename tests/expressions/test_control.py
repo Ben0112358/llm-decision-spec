@@ -1,6 +1,6 @@
 import pytest
 from llm_decision_spec.expressions.control import Coalesce, FillNA
-from llm_decision_spec.filters.comparison import Gt
+from llm_decision_spec.operators.comparison import Gt
 from llm_decision_spec.expressions.fields import Field
 from llm_decision_spec.operators.logical import And
 from llm_decision_spec.expressions import Const
