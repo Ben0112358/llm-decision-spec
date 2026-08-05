@@ -2,7 +2,7 @@ from llm_decision_spec.core.context import Context
 from llm_decision_spec.core.result import EvaluationResult
 from llm_decision_spec.expressions import Expr
 from llm_decision_spec.operators.base import Operator
-from llm_decision_spec.util.selection import (
+from llm_decision_spec.utils.selection import (
     filter_events_by_context_datetime,
     filter_events_by_event_datetime,
 )

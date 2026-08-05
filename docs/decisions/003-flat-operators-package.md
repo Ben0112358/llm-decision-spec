@@ -1,4 +1,4 @@
-# ADR 003: Flat operators package with core and util
+# ADR 003: Flat operators package with core and utils
 
 ## Context
 
@@ -10,7 +10,7 @@ Restructure into:
 
 - `core/` — `Context`, `EvaluationResult`
 - `operators/` — flat; all selection Operators (formerly under `filters/`)
-- `util/` — `selection.py` (predicate skeleton), `validate.py` (`_require_operator`)
+- `utils/` — `selection.py` (predicate skeleton), `validate.py` (`_require_operator`)
 - Remove `execution/`, `filters/`, and the old `operators/predicate.py` / `operators/_validate.py`
 
 Tests mirror the same first-level package names under `tests/`.

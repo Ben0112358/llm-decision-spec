@@ -8,7 +8,7 @@ from llm_decision_spec.reducers.numeric import (
     Percentile,
 )
 from llm_decision_spec.operators.logical import And
-from tests.utils.operators import DummyOperator
+from tests.helpers.operators import DummyOperator
 
 
 def make(context, ids):
@@ -145,6 +145,12 @@ def test_percentile_empty(context):
     assert result is None
 
 
+@pytest.mark.parametrize("invalid_percentile", [-0.1, 1.1])
+def test_invalid_percentile(invalid_percentile):
+    with pytest.raises(ValueError):
+        Percentile(Field("amount"), invalid_percentile)
+
+
 def test_numeric_with_and(context):
     a = make(context, [1, 2])
     b = make(context, [2, 3])
@@ -154,3 +160,10 @@ def test_numeric_with_and(context):
     result = Sum(Field("amount")).evaluate(expr, context)
 
     assert result == 100
+
+
+@pytest.mark.parametrize("reducer", [Sum, Average, Min, Max, Percentile])
+def test_non_numeric_value(context, reducer):
+    op = DummyOperator([{"amount": "foo"}])
+    with pytest.raises(TypeError):
+        reducer(Field("amount")).evaluate(op, context)

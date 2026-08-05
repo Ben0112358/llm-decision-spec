@@ -14,7 +14,7 @@ def _collect_numeric_values(expr: Expr, rows: list[dict]) -> list:
 
 def _ensure_numeric(values: list, expr: Expr) -> None:
     if not all(isinstance(v, (int, float)) for v in values):
-        raise ValueError(f"{expr!r} must be numeric")
+        raise TypeError(f"{expr!r} must be numeric")
 
 
 class Sum(Reducer):

@@ -1,6 +1,6 @@
-from tests.utils.operators import DummyOperator
-from tests.utils.events import event_ids
-from tests.utils.assertions import assert_event_ids
+from tests.helpers.operators import DummyOperator
+from tests.helpers.events import event_ids
+from tests.helpers.assertions import assert_event_ids
 from llm_decision_spec.operators.logical import And, Or, Not
 
 # -------------------------

@@ -7,10 +7,10 @@ Patterns for extending the codebase without breaking layer boundaries.
 - Use `Field("name")` and `Const(value)` in constructors. DO NOT pass raw strings where an `Expr` is expected.
 - `In` / `NotIn` require the RHS to be `Const` wrapping a `set` or `frozenset`.
 - `Regex` requires the pattern to be `Const` wrapping a `str`.
-- New **value-driven Operators** (compare or filter by Expr values) MUST use helpers in [`util/selection.py`](../src/llm_decision_spec/util/selection.py). Do not duplicate the event loop.
-- New **logical Operators** MUST validate children via [`util/validate.py`](../src/llm_decision_spec/util/validate.py).
+- New **value-driven Operators** (compare or filter by Expr values) MUST use helpers in [`utils/selection.py`](../src/llm_decision_spec/utils/selection.py). Do not duplicate the event loop.
+- New **logical Operators** MUST validate children via [`utils/validate.py`](../src/llm_decision_spec/utils/validate.py).
 - New **Expr** types MUST reject `Operator` children via `_require_expr` in [`expressions/base.py`](../src/llm_decision_spec/expressions/base.py).
-- Tests mirror `src/llm_decision_spec/` at the first directory level. Shared helpers go in `tests/utils/`, not in a mirrored package.
+- Tests mirror `src/llm_decision_spec/` at the first directory level. Shared helpers go in `tests/helpers/`, not in a mirrored package.
 
 ## Extension checklist
 
@@ -25,7 +25,7 @@ Patterns for extending the codebase without breaking layer boundaries.
 ### Add a value-driven Operator
 
 1. Subclass `Operator` in the appropriate module under `operators/`.
-2. Call a helper from `util/selection.py`:
+2. Call a helper from `utils/selection.py`:
    - `filter_events_by_predicate` — unary or binary value match
    - `filter_events_by_str_binary` — both sides must be `str`
    - `filter_events_by_event_datetime` / `filter_events_by_context_datetime` — temporal
@@ -52,13 +52,13 @@ Patterns for extending the codebase without breaking layer boundaries.
 |----------------|----------------|
 | `expressions/` | `tests/expressions/` |
 | `operators/` | `tests/operators/` |
-| `util/` | `tests/util/` |
+| `utils/` | `tests/utils/` |
 | `reducers/` | `tests/reducers/` |
 | `core/` | `tests/core/` (placeholder; `Context` exercised via root `conftest.py`) |
 | cross-layer smoke | `tests/test_feature_pipeline.py` (repo root) |
-| shared helpers | `tests/utils/` |
+| shared helpers | `tests/helpers/` |
 
-When adding a feature, place tests in the directory that mirrors the package you changed. Follow existing assertion helpers in `tests/utils/assertions.py` and `tests/utils/operators.py` where applicable.
+When adding a feature, place tests in the directory that mirrors the package you changed. Follow existing assertion helpers in `tests/helpers/assertions.py` and `tests/helpers/operators.py` where applicable.
 
 ## API patterns
 

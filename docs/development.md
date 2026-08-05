@@ -46,7 +46,7 @@ Dependabot opens weekly grouped PRs for Python and GitHub Actions dependencies. 
 
 ```
 src/llm_decision_spec/   # library source
-tests/                   # mirrors src/ at first level + tests/utils/
+tests/                   # mirrors src/ at first level + tests/helpers/
 docs/                    # architecture, domain, conventions (this tree)
 ```
 
