@@ -59,10 +59,10 @@ The Operator narrows `Context.events`; the Reducer runs `Sum` over `op.evaluate(
 | `core/` | Shared runtime types | `context.py` (`Context`), `result.py` (`EvaluationResult`) |
 | `expressions/` | Expr AST + per-event evaluation | `base.py`, `fields.py`, `evaluate.py`, `arithmetic.py`, `string.py`, `control.py` |
 | `operators/` | Operator ABC + all selection | `base.py`, `logical.py`, `comparison.py`, `membership.py`, `strings.py`, `presence.py`, `temporal.py`, `relation.py` (stub) |
-| `util/` | Shared operator helpers | `selection.py` (predicate loops), `validate.py` (`_require_operator`) |
+| `utils/` | Shared operator helpers | `selection.py` (predicate loops), `validate.py` (`_require_operator`) |
 | `reducers/` | Aggregation over operator output | `numeric.py`, `counting.py`, `boolean.py` |
 
-`tests/` mirrors `src/llm_decision_spec/` at the first directory level (`operators/`, `expressions/`, `util/`, `reducers/`, `core/`). Shared test helpers live in `tests/utils/` (not a source package).
+`tests/` mirrors `src/llm_decision_spec/` at the first directory level (`operators/`, `expressions/`, `utils/`, `reducers/`, `core/`). Shared test helpers live in `tests/helpers/` (not a source package).
 
 ## Key types
 
@@ -95,7 +95,7 @@ Defined in [`core/result.py`](../src/llm_decision_spec/core/result.py).
 3. Pass the operator (not just `.data`) to `reducer.evaluate(operator, context)`.
 4. The reducer re-evaluates the operator internally and aggregates over `.data`.
 
-Value-driven Operators (comparison, membership, strings) delegate event iteration to helpers in [`util/selection.py`](../src/llm_decision_spec/util/selection.py). Logical Operators delegate child validation to [`util/validate.py`](../src/llm_decision_spec/util/validate.py).
+Value-driven Operators (comparison, membership, strings) delegate event iteration to helpers in [`utils/selection.py`](../src/llm_decision_spec/utils/selection.py). Logical Operators delegate child validation to [`utils/validate.py`](../src/llm_decision_spec/utils/validate.py).
 
 ## See also
 

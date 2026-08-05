@@ -1,6 +1,6 @@
 from llm_decision_spec.operators.logical import And, Not
 from llm_decision_spec.reducers.boolean import Exists
-from tests.utils.operators import DummyOperator
+from tests.helpers.operators import DummyOperator
 
 
 def test_exists_true_when_non_empty(context):

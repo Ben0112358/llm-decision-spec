@@ -8,7 +8,7 @@ from llm_decision_spec.reducers.numeric import (
     Percentile,
 )
 from llm_decision_spec.operators.logical import And
-from tests.utils.operators import DummyOperator
+from tests.helpers.operators import DummyOperator
 
 
 def make(context, ids):
@@ -143,6 +143,7 @@ def test_percentile_empty(context):
     result = Percentile(Field("amount"), 0.5).evaluate(op, context)
 
     assert result is None
+
 
 @pytest.mark.parametrize("invalid_percentile", [-0.1, 1.1])
 def test_invalid_percentile(invalid_percentile):

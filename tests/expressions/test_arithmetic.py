@@ -1,6 +1,16 @@
 import pytest
 
-from llm_decision_spec.expressions import Add, Const, Field, Mul, Neg, Pow, Sub, Abs, Div
+from llm_decision_spec.expressions import (
+    Add,
+    Const,
+    Field,
+    Mul,
+    Neg,
+    Pow,
+    Sub,
+    Abs,
+    Div,
+)
 from llm_decision_spec.operators.comparison import Gt
 
 
@@ -30,17 +40,21 @@ def test_add_rejects_operator():
     with pytest.raises(TypeError, match="must be Expr"):
         Add(Gt(Field("a"), Const(1)), Const(2))
 
+
 def test_abs():
     event = {"a": -5}
     assert Abs(Field("a")).eval(event) == 5
+
 
 def test_div():
     event = {"a": 10, "b": 2}
     assert Div(Field("a"), Field("b")).eval(event) == 5
 
+
 def test_div_propagates_none():
     event = {"a": 10}
     assert Div(Field("a"), Field("b")).eval(event) is None
+
 
 def test_div_by_zero():
     event = {"a": 10, "b": 0}

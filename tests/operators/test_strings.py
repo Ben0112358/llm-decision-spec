@@ -1,6 +1,11 @@
 from llm_decision_spec.expressions import Const, Field
 from llm_decision_spec.operators.comparison import Gt
-from llm_decision_spec.operators.strings import Contains, Regex, StartsWith, EndsWith
+from llm_decision_spec.operators.strings import (
+    Contains,
+    Regex,
+    StartsWith,
+    EndsWith,
+)
 from llm_decision_spec.operators.logical import And
 import pytest
 
@@ -83,6 +88,7 @@ def test_contains_with_and(context):
 
     assert ids(result) == [2]
 
+
 @pytest.mark.parametrize(
     "prefix, expected_ids",
     [
@@ -96,13 +102,14 @@ def test_contains_with_and(context):
         ("USD", [1]),
         ("usd", []),
         ("SD", []),
-    ]
+    ],
 )
 def test_startswith_matches_prefix(context, prefix, expected_ids):
     op = StartsWith(Field("currency"), Const(prefix))
 
     result = op.evaluate(context)
     assert ids(result) == expected_ids
+
 
 @pytest.mark.parametrize(
     "suffix, expected_ids",
@@ -117,7 +124,7 @@ def test_startswith_matches_prefix(context, prefix, expected_ids):
         ("usd", []),
         ("SD", [1]),
         ("sd", []),
-    ]
+    ],
 )
 def test_endswith_matches_suffix(context, suffix, expected_ids):
     op = EndsWith(Field("currency"), Const(suffix))

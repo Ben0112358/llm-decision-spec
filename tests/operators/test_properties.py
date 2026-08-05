@@ -1,4 +1,4 @@
-from tests.utils.operators import DummyOperator
+from tests.helpers.operators import DummyOperator
 from llm_decision_spec.operators.logical import And, Or, Not
 
 

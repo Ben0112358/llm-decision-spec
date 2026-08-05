@@ -58,7 +58,7 @@ src/llm_decision_spec/
 ├── core/          # Context, EvaluationResult
 ├── expressions/   # Expr AST
 ├── operators/     # Operator AST (selection)
-├── util/          # Shared operator helpers
+├── utils/         # Shared operator helpers
 └── reducers/      # Aggregation
 
 tests/             # Mirrors src/ layout; see tests/conftest.py for fixtures

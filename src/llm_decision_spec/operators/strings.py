@@ -2,7 +2,7 @@ import re
 
 from llm_decision_spec.expressions.base import Const, Expr
 from llm_decision_spec.operators.base import Operator
-from llm_decision_spec.util.selection import (
+from llm_decision_spec.utils.selection import (
     filter_events_by_predicate,
     filter_events_by_str_binary,
 )
