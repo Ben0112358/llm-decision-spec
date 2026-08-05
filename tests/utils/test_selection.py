@@ -34,7 +34,9 @@ def test_binary_predicate_skips_when_either_side_missing(context):
 
 
 def test_binary_predicate_raises_without_match_or_right(context):
-    with pytest.raises(ValueError, match="binary predicate requires right and match"):
+    with pytest.raises(
+        ValueError, match="binary predicate requires right and match"
+    ):
         filter_events_by_predicate(context, left=Field("amount"))
 
 
@@ -67,6 +69,7 @@ def test_match_left_takes_precedence_over_binary_args(context):
     )
     assert_event_ids(result, [1], context)  # only id=1 has amount 200
 
+
 def test_str_binary_matches_strings(context):
     result = filter_events_by_str_binary(
         context,
@@ -80,8 +83,8 @@ def test_str_binary_matches_strings(context):
 def test_str_binary_skips_non_string_operands(context):
     result = filter_events_by_str_binary(
         context,
-        Field("amount"),   # int
-        Const("50"),       # str
+        Field("amount"),  # int
+        Const("50"),  # str
         match=lambda lv, rv: str(lv) == rv,
     )
     assert_event_ids(result, [], context)
@@ -104,6 +107,7 @@ def test_context_datetime_filters_by_event_time(context):
     )
     assert_event_ids(result, [1, 2, 3], context)
 
+
 def test_context_datetime_uses_context_fn_not_raw_field():
     event = {"id": 42, "datetime": datetime(2099, 1, 1)}
     ctx = Context(
@@ -117,6 +121,7 @@ def test_context_datetime_uses_context_fn_not_raw_field():
         match=lambda dt: dt.year == 2020,
     )
     assert_event_ids(result, [42], ctx)
+
 
 def test_event_datetime_passes_event_time_and_right_value(context):
     t_early = datetime(2025, 12, 31)
